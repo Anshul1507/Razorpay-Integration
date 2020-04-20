@@ -1,3 +1,5 @@
 <resources>
     <string name="app_name">Razorpay Integration</string>
+    <string name="hint_et_amount">Rs. 00.00</string>
+    <string name="pay">Pay</string>
 </resources>
