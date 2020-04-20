@@ -8,6 +8,16 @@
     android:layout_margin="16dp"
     tools:context=".MainActivity">
 
+    <EditText
+        android:id="@+id/et_amount"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="@string/hint_et_amount"
+        android:importantForAutofill="no"
+        android:inputType="number"
+        android:textSize="20sp"
+        />
+
     <Button
         android:id="@+id/btn_pay"
         android:layout_width="wrap_content"

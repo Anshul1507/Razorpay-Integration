@@ -4,6 +4,7 @@ import android.app.Activity;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
+import android.widget.EditText;
 import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
@@ -17,6 +18,8 @@ public class MainActivity extends AppCompatActivity implements PaymentResultList
 
     private static final String TAG = "MainActivity";
     Button btnPay;
+    EditText etAmount;
+    int amount=0;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -25,11 +28,17 @@ public class MainActivity extends AppCompatActivity implements PaymentResultList
         Checkout.preload(getApplicationContext());
 
         btnPay = findViewById(R.id.btn_pay);
+        etAmount = findViewById(R.id.et_amount);
 
         btnPay.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-               startPayment();
+                if(etAmount.getText().toString().equals("")) {
+                    amount = Integer.parseInt(etAmount.getText().toString()) * 100; //getting amount from et
+                    startPayment();
+                }else{
+                    Toast.makeText(getApplicationContext(), "Please enter some amount", Toast.LENGTH_SHORT).show();
+                }
             }
         });
     }
@@ -46,7 +55,7 @@ public class MainActivity extends AppCompatActivity implements PaymentResultList
             //You can omit the image option to fetch the image from dashboard
             options.put("image", "https://s3.amazonaws.com/rzp-mobile/images/rzp.png");
             options.put("currency", "INR");
-            options.put("amount","100");
+            options.put("amount", String.valueOf(amount));
 
             JSONObject preFill = new JSONObject();
             preFill.put("email", "test@razorpay.com");
