@@ -33,7 +33,7 @@ public class MainActivity extends AppCompatActivity implements PaymentResultList
         btnPay.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                if(etAmount.getText().toString().equals("")) {
+                if(!etAmount.getText().toString().equals("")) {
                     amount = Integer.parseInt(etAmount.getText().toString()) * 100; //getting amount from et
                     startPayment();
                 }else{
@@ -57,11 +57,16 @@ public class MainActivity extends AppCompatActivity implements PaymentResultList
             options.put("currency", "INR");
             options.put("amount", String.valueOf(amount));
 
-            JSONObject preFill = new JSONObject();
-            preFill.put("email", "test@razorpay.com");
-            preFill.put("contact", "6395825922");
+            JSONObject notes = new JSONObject();
+            notes.put("user_id","123abc");
+            notes.put("duration","5");
 
-            options.put("prefill", preFill);
+//            JSONObject preFill = new JSONObject();
+//            preFill.put("email", "test@razorpay.com");
+//            preFill.put("contact", "6395825922");
+
+//            options.put("prefill", preFill);
+            options.put("notes",notes);
 
             co.open(activity, options);
         } catch (Exception e) {
