@@ -58,14 +58,9 @@ public class MainActivity extends AppCompatActivity implements PaymentResultList
             options.put("amount", String.valueOf(amount));
 
             JSONObject notes = new JSONObject();
-            notes.put("user_id","123abc");
-            notes.put("duration","5");
+            notes.put("uid","12345");
+            notes.put("duration",Integer.parseInt("5"));
 
-//            JSONObject preFill = new JSONObject();
-//            preFill.put("email", "test@razorpay.com");
-//            preFill.put("contact", "6395825922");
-
-//            options.put("prefill", preFill);
             options.put("notes",notes);
 
             co.open(activity, options);
