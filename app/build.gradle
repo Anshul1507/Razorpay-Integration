@@ -10,7 +10,7 @@ android {
         targetSdkVersion 29
         versionCode 1
         versionName "1.0"
-
+        resValue "string", "razor_pay_api_key", 'rzp_test_WpCA1UL4fXGLN5'
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
     }
 

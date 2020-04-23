@@ -74,6 +74,7 @@ public class MainActivity extends AppCompatActivity implements PaymentResultList
 
     @Override
     public void onPaymentSuccess(String s) {
+        etAmount.setText("");
         Toast.makeText(this,"Payment Succeed.",Toast.LENGTH_SHORT).show();
     }
 
