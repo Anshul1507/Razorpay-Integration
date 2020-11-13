@@ -2,6 +2,7 @@ package com.netlify.anshulgupta.razorpayintegration;
 
 import android.app.Activity;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -19,7 +20,8 @@ public class MainActivity extends AppCompatActivity implements PaymentResultList
     private static final String TAG = "MainActivity";
     Button btnPay;
     EditText etAmount;
-    int amount=0;
+    int amount = 0;
+    String RAZORPAY_API_KEY = "rzp_test_WpCA1UL4fXGLN5";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -33,10 +35,10 @@ public class MainActivity extends AppCompatActivity implements PaymentResultList
         btnPay.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                if(!etAmount.getText().toString().equals("")) {
+                if (!etAmount.getText().toString().equals("")) {
                     amount = Integer.parseInt(etAmount.getText().toString()) * 100; //getting amount from et
                     startPayment();
-                }else{
+                } else {
                     Toast.makeText(getApplicationContext(), "Please enter some amount", Toast.LENGTH_SHORT).show();
                 }
             }
@@ -47,21 +49,24 @@ public class MainActivity extends AppCompatActivity implements PaymentResultList
         final Activity activity = this;
 
         final Checkout co = new Checkout();
+        co.setKeyID(RAZORPAY_API_KEY);
 
         try {
             JSONObject options = new JSONObject();
             options.put("name", "Razorpay Corp");
             options.put("description", "Demoing Charges");
+
             //You can omit the image option to fetch the image from dashboard
             options.put("image", "https://s3.amazonaws.com/rzp-mobile/images/rzp.png");
             options.put("currency", "INR");
             options.put("amount", String.valueOf(amount));
+            Log.i(TAG, "Amount: " + amount);
 
             JSONObject notes = new JSONObject();
-            notes.put("uid","12345");
-            notes.put("duration",Integer.parseInt("5"));
+            notes.put("uid", "12345");
+            notes.put("duration", Integer.parseInt("5"));
 
-            options.put("notes",notes);
+            options.put("notes", notes);
 
             co.open(activity, options);
         } catch (Exception e) {
@@ -75,11 +80,11 @@ public class MainActivity extends AppCompatActivity implements PaymentResultList
     @Override
     public void onPaymentSuccess(String s) {
         etAmount.setText("");
-        Toast.makeText(this,"Payment Succeed.",Toast.LENGTH_SHORT).show();
+        Toast.makeText(this, "Payment Succeed.", Toast.LENGTH_SHORT).show();
     }
 
     @Override
     public void onPaymentError(int i, String s) {
-        Toast.makeText(this,"Payment Failed.",Toast.LENGTH_SHORT).show();
+        Toast.makeText(this, "Payment Failed.", Toast.LENGTH_SHORT).show();
     }
 }

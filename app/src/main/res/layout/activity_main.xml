@@ -3,9 +3,9 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical"
-    android:gravity="center"
     android:layout_margin="16dp"
+    android:gravity="center"
+    android:orientation="vertical"
     tools:context=".MainActivity">
 
     <EditText
@@ -15,16 +15,14 @@
         android:hint="@string/hint_et_amount"
         android:importantForAutofill="no"
         android:inputType="number"
-        android:textSize="20sp"
-        />
+        android:textSize="20sp" />
 
     <Button
         android:id="@+id/btn_pay"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_margin="8dp"
         android:text="@string/pay"
         android:textAllCaps="false"
-        android:layout_margin="8dp"
-        android:textSize="18sp"
-        />
+        android:textSize="18sp" />
 </LinearLayout>
